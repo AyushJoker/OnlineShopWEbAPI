@@ -30,6 +30,14 @@ namespace OnlineShopWEbAPI
             services.AddDbContext<AppDbContext>(item =>
        item.UseSqlServer(Configuration.GetConnectionString("MyConStr")));
             services.AddControllers();
+            services.AddCors(setup =>
+            {
+                setup.AddPolicy("default", options =>
+                {
+                    options.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+                });
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +48,8 @@ namespace OnlineShopWEbAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            // Cross Origin Resource Sharing Polic   
+            app.UseCors("default");
             app.UseHttpsRedirection();
 
             app.UseRouting();

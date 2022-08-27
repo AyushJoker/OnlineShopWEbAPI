@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShopWEbAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using OnlineShopWEbAPI.Models;
 
-namespace OnlineShopWEbAPI.Controllers
+namespace WEB_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -29,15 +29,15 @@ namespace OnlineShopWEbAPI.Controllers
             return (data);
         }
         [HttpPost]
-        public ActionResult Post(User newUser)
+        public ActionResult Post(User newuser)
         {
-            _context.Users.Add(newUser);
+            _context.Users.Add(newuser);
             _context.SaveChanges();
             //return Ok();
-            return CreatedAtAction("Get", new { newUser.UID }, newUser);
+            return CreatedAtAction("Get", new { newuser.UID }, newuser);
         }
         [HttpPut("{id}")]
-        public ActionResult Put(int id, User modifiedCat)
+        public ActionResult Put(int id, User modifieduser)
         {
             var data = _context.Users.FirstOrDefault(u => u.UID == id);
             if (data == null)
@@ -46,7 +46,14 @@ namespace OnlineShopWEbAPI.Controllers
             }
             else
             {
-                data.Lastname = modifiedCat.Lastname;
+                data.Firstname = modifieduser.Firstname;
+                data.Lastname = modifieduser.Lastname;
+                data.Email = modifieduser.Email;
+                data.Password = modifieduser.Password;
+                data.Confirm_Password = modifieduser.Confirm_Password;
+                data.Mobile = modifieduser.Mobile;
+                data.City = modifieduser.City;
+                data.Pincode = modifieduser.Pincode;
                 _context.SaveChanges();
                 return Ok();
             }
@@ -54,10 +61,21 @@ namespace OnlineShopWEbAPI.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            var data = _context.Users.FirstOrDefault(u=> u.UID == id);
+            var data = _context.Users.FirstOrDefault(u => u.UID == id);
             _context.Users.Remove(data);
             _context.SaveChanges();
             return Ok();
+        }
+        [Route("login")]
+        [HttpPost]
+        public ActionResult<User> LogInChecker(User details)
+        {
+            var data = _context.Users.FirstOrDefault(p => (p.Email == details.Email && p.Password == details.Password));
+            if (data == null)
+            {
+                return BadRequest("Email or Password is incorrect");
+            }
+            return Ok(data);
         }
     }
 }
