@@ -19,6 +19,8 @@ namespace OnlineShopWEbAPI.Models
 
         public DbSet<Retailer> Retailers { get; set; }
 
+        public DbSet<Admin> Admins { get; set; }
+
 
     }
 }
