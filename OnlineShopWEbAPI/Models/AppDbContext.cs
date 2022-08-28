@@ -17,6 +17,8 @@ namespace OnlineShopWEbAPI.Models
         public DbSet<Product> Products { get; set; }
         public DbSet<CatProdView> CatIdwiseProducts { get; set; }
 
+        public DbSet<Retailer> Retailers { get; set; }
+
 
     }
 }

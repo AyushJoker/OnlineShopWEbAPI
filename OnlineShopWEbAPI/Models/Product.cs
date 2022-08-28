@@ -17,5 +17,7 @@ namespace OnlineShopWEbAPI.Models
         public string PImage1 { get; set; }
         public string PImage2 { get; set; }
         public string PImage3{ get; set; }
+
+        public int RID { get; set; }
     }
 }
