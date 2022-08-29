@@ -22,10 +22,10 @@ namespace WEB_API.Controllers
         {
             return Ok(_context.Users.ToList());
         }
-        [HttpGet("{id}")]
-        public ActionResult<User> Get(int id)
+        [HttpGet("{useremail}")]
+        public ActionResult<User> Get(string useremail)
         {
-            var data = _context.Users.FirstOrDefault(u => u.UID == id);
+            var data = _context.Users.FirstOrDefault(ue => ue.Email == useremail);
             return (data);
         }
         [HttpPost]
