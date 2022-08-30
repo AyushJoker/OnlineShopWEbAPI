@@ -36,10 +36,10 @@ namespace WEB_API.Controllers
             //return Ok();
             return CreatedAtAction("Get", new { newuser.UID }, newuser);
         }
-        [HttpPut("{id}")]
-        public ActionResult Put(int id, User modifieduser)
+        [HttpPut("{useremail}")]
+        public ActionResult Put(string useremail, User modifieduser)
         {
-            var data = _context.Users.FirstOrDefault(u => u.UID == id);
+            var data = _context.Users.FirstOrDefault(u => u.Email == useremail);
             if (data == null)
             {
                 return BadRequest();
