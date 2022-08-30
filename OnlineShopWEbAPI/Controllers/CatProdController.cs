@@ -33,5 +33,13 @@ namespace OnlineShopWEbAPI.Controllers
             return Ok(data);
 
         }
+        [HttpGet("{item}")]
+        [Route("search/{item}")]
+        public ActionResult Search(string item)
+        {
+            var data = _context.CatIdwiseProducts.FromSqlInterpolated($"Sp_SearchProduct {item}");
+            return Ok(data);
+
+        }
     }
 }
