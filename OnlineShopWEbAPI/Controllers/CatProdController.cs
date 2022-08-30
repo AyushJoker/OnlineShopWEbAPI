@@ -20,6 +20,7 @@ namespace OnlineShopWEbAPI.Controllers
         public AppDbContext _context { get; }
 
         [HttpGet("{id}")]
+        [Route("prodlist/{id}")]
         public ActionResult Index(int id)
         {
             var data = _context.CatIdwiseProducts.FromSqlInterpolated($"Sp_CatIdWiseProd {id}");
@@ -27,6 +28,7 @@ namespace OnlineShopWEbAPI.Controllers
 
         }
         [HttpGet("{id}/{id1}")]
+        [Route("product/{id}/{id1}")]
         public ActionResult Index1(int id,int id1)
         {
             var data = _context.CatIdwiseProducts.FromSqlInterpolated($"SP_CatIdWiseProdDetail {id},{id1}");
@@ -39,7 +41,6 @@ namespace OnlineShopWEbAPI.Controllers
         {
             var data = _context.CatIdwiseProducts.FromSqlInterpolated($"Sp_SearchProduct {item}");
             return Ok(data);
-
         }
     }
 }

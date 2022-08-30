@@ -37,6 +37,7 @@ namespace WEB_API.Controllers
             return CreatedAtAction("Get", new { newuser.UID }, newuser);
         }
         [HttpPut("{useremail}")]
+        [Route("edituser/{useremail}")]
         public ActionResult Put(string useremail, User modifieduser)
         {
             var data = _context.Users.FirstOrDefault(u => u.Email == useremail);
@@ -49,8 +50,8 @@ namespace WEB_API.Controllers
                 data.Firstname = modifieduser.Firstname;
                 data.Lastname = modifieduser.Lastname;
                 data.Email = modifieduser.Email;
-                data.Password = modifieduser.Password;
-                data.Confirm_Password = modifieduser.Confirm_Password;
+                //data.Password = modifieduser.Password;
+                //data.Confirm_Password = modifieduser.Confirm_Password;
                 data.Mobile = modifieduser.Mobile;
                 data.City = modifieduser.City;
                 data.Pincode = modifieduser.Pincode;
