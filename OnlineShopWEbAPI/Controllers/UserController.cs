@@ -58,6 +58,24 @@ namespace WEB_API.Controllers
                 return Ok();
             }
         }
+        
+        [HttpPut("{useremail}")]
+        [Route("updatepass/{useremail}")]
+        public ActionResult Updatepassword(string useremail, User modifieduser)
+        {
+            var data = _context.Users.FirstOrDefault(u => u.Email == useremail);
+            if (data == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                data.Password = modifieduser.Password;
+                data.Confirm_Password = modifieduser.Confirm_Password;
+                _context.SaveChanges();
+                return Ok();
+            }
+        }
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
@@ -74,6 +92,17 @@ namespace WEB_API.Controllers
             if (data == null)
             {
                 return BadRequest("Email or Password is incorrect");
+            }
+            return Ok(data);
+        }
+        [Route("checkemail")]
+        [HttpPost]
+        public ActionResult<User> emailChecker(User details)
+        {
+            var data = _context.Users.FirstOrDefault(p => (p.Email == details.Email));
+            if (data == null)
+            {
+                return BadRequest("Email does not exist");
             }
             return Ok(data);
         }
