@@ -24,7 +24,7 @@ namespace OnlineShopWEbAPI.Controllers
             return Ok(_context.Admins.ToList());
         }
 
-        [Route("alogin")]
+        [Route("login")]
         [HttpPost]
         public ActionResult<Retailer> LogInChecker(Admin details)
         {
