@@ -19,5 +19,7 @@ namespace OnlineShopWEbAPI.Models
         public string PImage3{ get; set; }
 
         public int RID { get; set; }
+
+        public int Isavailable { get; set; }
     }
 }

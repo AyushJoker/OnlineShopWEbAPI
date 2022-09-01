@@ -18,5 +18,6 @@ namespace OnlineShopWEbAPI.Models
 
         public string Password { get; set; }
         public string Contactnumber { get; set; }
+        public int Isavailable { get; set; }
     }
 }

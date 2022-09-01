@@ -21,5 +21,7 @@ namespace OnlineShopWEbAPI.Models
         public string PImage3 { get; set; }
 
         public string CName { get; set; }
+        public int Isavailable { get; set; }
+
     }
 }

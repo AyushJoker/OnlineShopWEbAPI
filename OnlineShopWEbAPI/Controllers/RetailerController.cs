@@ -45,7 +45,7 @@ namespace OnlineShopWEbAPI.Controllers
         }
 
         [HttpPut("{id}")]
-
+        [Route("updateretailer/{id}")]
         public ActionResult Put(int id, Retailer modifiedretailer)
         {
             var data = _context.Retailers.FirstOrDefault(c => c.RID == id);
@@ -59,6 +59,28 @@ namespace OnlineShopWEbAPI.Controllers
                 data.Contactnumber = modifiedretailer.Contactnumber;
 
 
+                _context.SaveChanges();
+                return Ok();
+            }
+        }
+
+        [HttpPut("{id}")]
+        [Route("isavailable/{id}")]
+        public ActionResult Updateavailablity(int id, Retailer modifiedretailer)
+        {
+            var data = _context.Retailers.FirstOrDefault(c => c.RID == id);
+            if (data == null)
+                return BadRequest();
+            else
+            {
+                if (data.Isavailable == 0)
+                {
+                    data.Isavailable = 1;
+                }
+                else
+                {
+                    data.Isavailable = 0;
+                }
                 _context.SaveChanges();
                 return Ok();
             }
