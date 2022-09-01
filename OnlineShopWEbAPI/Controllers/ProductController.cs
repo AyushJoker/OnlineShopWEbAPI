@@ -24,7 +24,7 @@ namespace OnlineShopWEbAPI.Controllers
             return Ok(_context.Products.ToList());
         }
         [HttpGet("{id}")]
-
+        [Route("editproduct/{id}")]
         public ActionResult<Product> Get(int id)
         {
             var data = _context.Products.FirstOrDefault(c => c.PID == id);
@@ -45,7 +45,7 @@ namespace OnlineShopWEbAPI.Controllers
         }
 
         [HttpPut("{id}")]
-
+        [Route("updateproduct/{id}")]
         public ActionResult Put(int id, Product modifiedproduct)
         {
             var data = _context.Products.FirstOrDefault(c => c.PID == id);
@@ -60,6 +60,27 @@ namespace OnlineShopWEbAPI.Controllers
                 data.PImage3 = modifiedproduct.PImage3;
                 data.Price = modifiedproduct.Price;
 
+                _context.SaveChanges();
+                return Ok();
+            }
+        }
+        [HttpPut("{id}")]
+        [Route("isavailable/{id}")]
+        public ActionResult Updateavailablity(int id, Product modifiedproduct)
+        {
+            var data = _context.Products.FirstOrDefault(c => c.PID == id);
+            if (data == null)
+                return BadRequest();
+            else
+            {
+                if(data.Isavailable==0)
+                {
+                    data.Isavailable = 1;
+                }
+                else
+                {
+                    data.Isavailable = 0;
+                }
                 _context.SaveChanges();
                 return Ok();
             }
